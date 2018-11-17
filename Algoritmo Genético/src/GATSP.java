@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class GATSP {
 
-	private static final String endereco = "D:\\Documentos\\Instancias GA";
+	private static final String endereco = "Instancias GA";
 
 	private static Integer n = 0;
  
