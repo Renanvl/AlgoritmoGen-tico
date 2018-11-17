@@ -57,22 +57,18 @@ public class GATSP {
 				    	i++;
 				    	j=0;
 				    }
-				    if( i==16 && j==17) {
+				    if( i==n-2 && j==n-1) {
 				    	break;
 				    }
 			}
-			
-			
+
 			for(int a=0; a<n; a++){
 				System.out.println();
 				for(int b=0; b<n; b++){
 						
 						System.out.print(matrizDist[a][b]+" ");
-				}
-				
-			}
-			
-
+				}			
+			}		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,6 +89,12 @@ public class GATSP {
 		tamanho = Integer.parseInt(tamanhoString);
 		// System.out.println(tamanho);
 		return tamanho;
+	}
+	
+	public ArrayList<Integer>  tsp(int[][] matriz ) {
+		ArrayList<Integer> melhoresElementos = new ArrayList<Integer>();
+		
+		return melhoresElementos;
 	}
 
 }
