@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ManipuladorMatriz {
@@ -84,13 +80,12 @@ public class ManipuladorMatriz {
 		}
 
 		for (int a = 0; a < n; a++) {
-			System.out.println();
+			//System.out.println();
 			for (int b = 0; b < n; b++) {
 
-				System.out.print(matrizDist[a][b] + " ");
+			//	System.out.print(matrizDist[a][b] + " ");
 			}
 		}
-		System.out.println();
 		return matrizDist;
 	}
 

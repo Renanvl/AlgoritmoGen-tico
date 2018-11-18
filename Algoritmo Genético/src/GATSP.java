@@ -34,7 +34,7 @@ public class GATSP {
 						elementosMatriz.add(Integer.parseInt(elemento[x]));
 					}
 				}
-				System.out.println(linha);
+			//	System.out.println(linha);
 				contLinha++;
 				linha = arquivoLeitura.readLine();
 			}
