@@ -46,7 +46,7 @@ public class AlgoritmoGenetico {
 
 
     public int[] tsp(Integer[][] matriz) {
-    	tempoInicial = System.currentTimeMillis();
+    	tempoInicial = System.nanoTime();
         this.dist = matriz;
         pointNum = matriz.length;
         init();
@@ -58,8 +58,8 @@ public class AlgoritmoGenetico {
             }
         }
         BooleanProxGeracaoAuto = false;
-        long tempoFinal   = System.currentTimeMillis();
-		System.out.println("\nTempo de execuÃ§Ã£o: "+ -1* (tempoInicial - tempoFinal)+" milisegundos\n");
+        long tempoFinal   = System.nanoTime();
+		System.out.println("\nTempo de execução: "+ (-1* (tempoInicial - tempoFinal))+" nanosegundos\n");
         return getMelhorIndividuo();
     }
 

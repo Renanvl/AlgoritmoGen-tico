@@ -72,13 +72,13 @@ public class ManipuladorMatriz {
 		}
 		
 		for (int a = 0; a < n; a++) {
-			System.out.println();
+			//System.out.println();
 			for (int b = 0; b < n; b++) {
 
-				System.out.print(matrizDist[a][b] + " ");
+			//	System.out.print(matrizDist[a][b] + " ");
 			}
 		}
-     System.out.println();
+    // System.out.println();
 		return matrizDist;
 	}
 
