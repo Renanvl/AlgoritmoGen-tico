@@ -42,12 +42,15 @@ public class GATSP {
 			ManipuladorMatriz mm = new ManipuladorMatriz(numeroIndividuos);
 			AlgoritmoGenetico ga = AlgoritmoGenetico.getInstance();
 			melhorCaminho = ga.tsp(mm.montarMatriz(elementosMatriz,nomeArquivo));
+			int distaanciaTotal = mm.somaDist(melhorCaminho,mm.montarMatriz(elementosMatriz,nomeArquivo));
 			System.out.print("Melhor Caminho: ");
 	        for (int i = 0; i < melhorCaminho.length; i++) {
 	            System.out.print(melhorCaminho[i] + "-");
 	        }
 	        System.out.println(melhorCaminho[0]);
 			
+	        System.out.println(distaanciaTotal);
+	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

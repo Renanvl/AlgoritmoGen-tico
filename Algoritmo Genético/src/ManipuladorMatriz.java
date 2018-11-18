@@ -7,12 +7,13 @@ import java.util.ArrayList;
 public class ManipuladorMatriz {
 
 	public ManipuladorMatriz(Integer n) {
-		this.n =n;
+		this.n = n;
 	}
-	
-	private  Integer n = 0;
-	
-	public  Integer identificarTamanhoMatriz(String nomeArquivo) {
+
+	private Integer n = 0;
+	private Integer[][] matrizDist;
+
+	public Integer identificarTamanhoMatriz(String nomeArquivo) {
 		Integer tamanho = 0;
 		String tamanhoString = "";
 		char elementoString;
@@ -24,7 +25,6 @@ public class ManipuladorMatriz {
 			tamanhoString += nomeArquivo.charAt(i);
 		}
 		tamanho = Integer.parseInt(tamanhoString);
-		// System.out.println(tamanho);
 		return tamanho;
 	}
 
@@ -38,7 +38,19 @@ public class ManipuladorMatriz {
 		return tipo;
 	}
 
-	public  Integer[][] montarMatriz(ArrayList<Integer> elementosMatriz,String nomeArquivo) {
+	public Integer somaDist(int[] melhorCaminho, Integer[][] matrizResultado) {
+		int distanciaTotal = 0;
+		for (int i = 0; i <= melhorCaminho.length - 1; i++) {
+			if (i == melhorCaminho.length - 1) {
+				distanciaTotal += matrizResultado[melhorCaminho[i]][0];
+				break;
+			}
+			distanciaTotal += matrizResultado[melhorCaminho[i]][melhorCaminho[i + 1]];
+		}
+		return distanciaTotal;
+	}
+
+	public Integer[][] montarMatriz(ArrayList<Integer> elementosMatriz, String nomeArquivo) {
 		String tipo = identificarTipoMatriz(nomeArquivo);
 		int i = 0, j = 0;
 		Integer[][] matrizDist = new Integer[n][n];
@@ -55,11 +67,11 @@ public class ManipuladorMatriz {
 					break;
 				}
 			}
-		}else if (tipo.equals("UPPER")){
+		} else if (tipo.equals("UPPER")) {
 			for (int k = 0; k < elementosMatriz.size(); k++) {
-				if (elementosMatriz.get(k) == 0 && k!=0) {
+				if (elementosMatriz.get(k) == 0 && k != 0) {
 					i++;
-					j=i;
+					j = i;
 				}
 				if (j == n) {
 					break;
@@ -67,10 +79,10 @@ public class ManipuladorMatriz {
 				matrizDist[i][j] = elementosMatriz.get(k);
 				matrizDist[j][i] = elementosMatriz.get(k);
 				j++;
-				
+
 			}
 		}
-		
+
 		for (int a = 0; a < n; a++) {
 			System.out.println();
 			for (int b = 0; b < n; b++) {
@@ -78,7 +90,7 @@ public class ManipuladorMatriz {
 				System.out.print(matrizDist[a][b] + " ");
 			}
 		}
-     System.out.println();
+		System.out.println();
 		return matrizDist;
 	}
 
