@@ -8,13 +8,13 @@ public class GATSP {
 
 	private static final String endereco = "Instancias GA";
 
-	private static Integer n = 0;
+	private static Integer numeroIndividuos = 0;
 
 	public static void main(String[] args) {
 		try {
 			String nomeArquivo ;
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-			nomeArquivo = "gr17.tsp";/* input.readLine(); */
+			nomeArquivo = "si4.tsp";/* input.readLine(); */
 			BufferedReader arquivoLeitura = new BufferedReader(new FileReader(endereco + "\\" + nomeArquivo));
 			String linha = arquivoLeitura.readLine();
 			String SomaLinhas = "";
@@ -23,7 +23,7 @@ public class GATSP {
 			
 			System.out.println("Insira o nome do arquivo de dados (ex.: dados.txt):");
 			
-			n = identificarTamanhoMatriz(nomeArquivo);
+			numeroIndividuos = identificarTamanhoMatriz(nomeArquivo);
 			while (linha != null) {
 				String[] elemento = linha.trim().split(" ");
 				if (contLinha > 7) {
@@ -38,8 +38,16 @@ public class GATSP {
 				contLinha++;
 				linha = arquivoLeitura.readLine();
 			}
-			ManipuladorMatriz mm = new ManipuladorMatriz(n);
-			mm.montarMatriz(elementosMatriz,nomeArquivo);	
+			int[] melhorCaminho;
+			ManipuladorMatriz mm = new ManipuladorMatriz(numeroIndividuos);
+			GeneticAlgorithm ga = GeneticAlgorithm.getInstance();
+			melhorCaminho = ga.tsp(mm.montarMatriz(elementosMatriz,nomeArquivo));
+			System.out.print("Melhor Caminho: ");
+	        for (int i = 0; i < melhorCaminho.length; i++) {
+	            System.out.print(melhorCaminho[i] + "-");
+	        }
+	        System.out.println(melhorCaminho[0]);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +71,14 @@ public class GATSP {
 	public ArrayList<Integer> tsp(int[][] matriz) {
 		ArrayList<Integer> melhoresElementos = new ArrayList<Integer>();
 		return melhoresElementos;
+	}
+
+	public static Integer getNumeroIndividuos() {
+		return numeroIndividuos;
+	}
+
+	public static void setNumeroIndividuos(Integer numeroIndividuos) {
+		GATSP.numeroIndividuos = numeroIndividuos;
 	}
 
 }

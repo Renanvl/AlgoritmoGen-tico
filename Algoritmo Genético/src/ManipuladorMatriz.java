@@ -78,7 +78,7 @@ public class ManipuladorMatriz {
 				System.out.print(matrizDist[a][b] + " ");
 			}
 		}
-
+     System.out.println();
 		return matrizDist;
 	}
 
