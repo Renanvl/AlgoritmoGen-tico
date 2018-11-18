@@ -14,7 +14,7 @@ public class GATSP {
 		try {
 			String nomeArquivo ;
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-			nomeArquivo = "si1032.tsp";/* input.readLine(); */
+			nomeArquivo = "gr17.tsp";/* input.readLine(); */
 			BufferedReader arquivoLeitura = new BufferedReader(new FileReader(endereco + "\\" + nomeArquivo));
 			String linha = arquivoLeitura.readLine();
 			String SomaLinhas = "";
@@ -42,14 +42,14 @@ public class GATSP {
 			ManipuladorMatriz mm = new ManipuladorMatriz(numeroIndividuos);
 			AlgoritmoGenetico ga = AlgoritmoGenetico.getInstance();
 			melhorCaminho = ga.tsp(mm.montarMatriz(elementosMatriz,nomeArquivo));
-			int distaanciaTotal = mm.somaDist(melhorCaminho,mm.montarMatriz(elementosMatriz,nomeArquivo));
+			int distanciaTotal = mm.somaDist(melhorCaminho,mm.montarMatriz(elementosMatriz,nomeArquivo));
 			System.out.print("Melhor Caminho: ");
 	        for (int i = 0; i < melhorCaminho.length; i++) {
 	            System.out.print(melhorCaminho[i] + "-");
 	        }
 	        System.out.println(melhorCaminho[0]);
 			
-	        System.out.println(distaanciaTotal);
+	        System.out.println("Distância: "+distanciaTotal);
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
