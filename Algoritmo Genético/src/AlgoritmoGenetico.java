@@ -14,12 +14,11 @@ public class AlgoritmoGenetico {
     
     private float probabilidadeDeCrossOver = 0.9f; 
     private float probabilidadeDeMutacao = 0.01f; 
-    private int tamanhoPopulacao = gatsp.getNumeroIndividuos();
+    private int tamanhoPopulacao = gatsp.getNumeroCidades();
 
 
 	private int numeroDeMutacoes = 0; 
     private int atualGeracao = 0; 
-    private int maxGeracao = 1000; 
 
     private int pointNum;
     private int[][] populacao; 
@@ -27,14 +26,12 @@ public class AlgoritmoGenetico {
 
     private int[] melhorIndividuo; 
     private float melhorDist; 
-    private int atualMelhorPosicao;
-    private float atualMelhorDist; 
+    private int melhorPosicaoAtual;
+    private float melhorDistAtual; 
 
     private float[] valores; 
-    private float[] valorCabivel; 
+    private float[] valorAptidao; 
     private float[] roleta;
-
-    private boolean BooleanProxGeracaoAuto = false;
 
     public static AlgoritmoGenetico getInstance() {
         return AlgoritmoGeneticoH.instance;
@@ -50,16 +47,7 @@ public class AlgoritmoGenetico {
         this.dist = matriz;
         pointNum = matriz.length;
         init();
-
-        if (BooleanProxGeracaoAuto) {
-            int i = 0;
-            while (i++ < maxGeracao) {
-                proxGeracao();
-            }
-        }
-        BooleanProxGeracaoAuto = false;
-        long tempoFinal   = System.nanoTime();
-		System.out.println("\nTempo de execução: "+ (-1* (tempoInicial - tempoFinal))+" nanosegundos\n");
+        
         return getMelhorIndividuo();
     }
 
@@ -69,11 +57,11 @@ public class AlgoritmoGenetico {
         setAtualGeracao(0);
         melhorIndividuo = null;
         melhorDist = 0;
-        atualMelhorPosicao = 0;
-        atualMelhorDist = 0;
+        melhorPosicaoAtual = 0;
+        melhorDistAtual = 0;
 
         valores = new float[tamanhoPopulacao];
-        valorCabivel = new float[tamanhoPopulacao];
+        valorAptidao = new float[tamanhoPopulacao];
         roleta = new float[tamanhoPopulacao];
         populacao = new int[tamanhoPopulacao][pointNum];
 
@@ -98,7 +86,7 @@ public class AlgoritmoGenetico {
         int[][] parentes = new int[tamanhoPopulacao][pointNum];
 
         int initnum = 4;
-        parentes[0] = populacao[atualMelhorPosicao];
+        parentes[0] = populacao[melhorPosicaoAtual];
         parentes[1] = exchangeMutate(melhorIndividuo.clone()); 
         parentes[2] = inserirMutacoes(melhorIndividuo.clone()); 
         parentes[3] = melhorIndividuo.clone(); 
@@ -114,16 +102,16 @@ public class AlgoritmoGenetico {
     private void setRoleta() {
        
         for (int i = 0; i < valores.length; i++) {
-            valorCabivel[i] = 1.0f / valores[i]; 
+            valorAptidao[i] = 1.0f / valores[i]; 
         }
 
        
         float sum = 0;
-        for (int i = 0; i < valorCabivel.length; i++) {
-            sum += valorCabivel[i];
+        for (int i = 0; i < valorAptidao.length; i++) {
+            sum += valorAptidao[i];
         }
         for (int i = 0; i < roleta.length; i++) {
-            roleta[i] = valorCabivel[i] / sum;
+            roleta[i] = valorAptidao[i] / sum;
         }
         for (int i = 1; i < roleta.length; i++) {
             roleta[i] += roleta[i - 1];
@@ -258,9 +246,9 @@ public class AlgoritmoGenetico {
             valores[i] = calcularDistIndividual(populacao[i]);
         }
         calcularMelhorDistAtual();
-        if (melhorDist == 0 || melhorDist > atualMelhorDist) {
-            melhorDist = atualMelhorDist;
-            melhorIndividuo = populacao[atualMelhorPosicao].clone();
+        if (melhorDist == 0 || melhorDist > melhorDistAtual) {
+            melhorDist = melhorDistAtual;
+            melhorIndividuo = populacao[melhorPosicaoAtual].clone();
         }
     }
 
@@ -275,11 +263,11 @@ public class AlgoritmoGenetico {
 
 
     public void calcularMelhorDistAtual() {
-        atualMelhorDist = valores[0];
+        melhorDistAtual = valores[0];
         for (int i = 1; i < tamanhoPopulacao; i++) {
-            if (valores[i] < atualMelhorDist) {
-                atualMelhorDist = valores[i];
-                atualMelhorPosicao = i;
+            if (valores[i] < melhorDistAtual) {
+                melhorDistAtual = valores[i];
+                melhorPosicaoAtual = i;
             }
         }
     }
@@ -353,6 +341,11 @@ public class AlgoritmoGenetico {
 
 	public void setAtualGeracao(int atualGeracao) {
 		this.atualGeracao = atualGeracao;
+	}
+
+
+	public static long getTempoInicial() {
+		return tempoInicial;
 	}
 
 }

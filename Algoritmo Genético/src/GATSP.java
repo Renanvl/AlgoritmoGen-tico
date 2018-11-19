@@ -8,13 +8,13 @@ public class GATSP {
 
 	private static final String endereco = "Instancias GA";
 
-	private static Integer numeroIndividuos = 0;
+	private static Integer numeroCidades = 0;
 
 	public static void main(String[] args) {
 		try {
 			String nomeArquivo ;
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-			nomeArquivo = "gr17.tsp";/* input.readLine(); */
+			nomeArquivo = "si1032.tsp";/* input.readLine(); */
 			BufferedReader arquivoLeitura = new BufferedReader(new FileReader(endereco + "\\" + nomeArquivo));
 			String linha = arquivoLeitura.readLine();
 			String SomaLinhas = "";
@@ -23,7 +23,7 @@ public class GATSP {
 			
 			System.out.println("Insira o nome do arquivo de dados (ex.: dados.txt):");
 			
-			numeroIndividuos = identificarTamanhoMatriz(nomeArquivo);
+			numeroCidades = identificarTamanhoMatriz(nomeArquivo);
 			while (linha != null) {
 				String[] elemento = linha.trim().split(" ");
 				if (contLinha > 7) {
@@ -39,9 +39,11 @@ public class GATSP {
 				linha = arquivoLeitura.readLine();
 			}
 			int[] melhorCaminho;
-			ManipuladorMatriz mm = new ManipuladorMatriz(numeroIndividuos);
+			ManipuladorMatriz mm = new ManipuladorMatriz(numeroCidades);
 			AlgoritmoGenetico ga = AlgoritmoGenetico.getInstance();
 			melhorCaminho = ga.tsp(mm.montarMatriz(elementosMatriz,nomeArquivo));
+			long tempoFinal = System.nanoTime();
+			System.out.println("\nTempo de execução: "+ (-1* (ga.getTempoInicial() - tempoFinal))+" nanosegundos\n");
 			int distanciaTotal = mm.somaDist(melhorCaminho,mm.montarMatriz(elementosMatriz,nomeArquivo));
 			System.out.print("Melhor Caminho: ");
 	        for (int i = 0; i < melhorCaminho.length; i++) {
@@ -76,12 +78,12 @@ public class GATSP {
 		return melhoresElementos;
 	}
 
-	public Integer getNumeroIndividuos() {
-		return numeroIndividuos;
+	public Integer getNumeroCidades() {
+		return numeroCidades;
 	}
 
-	public static void setNumeroIndividuos(Integer numeroIndividuos) {
-		GATSP.numeroIndividuos = numeroIndividuos;
+	public static void setNumeroCidades(Integer numeroCidades) {
+		GATSP.numeroCidades = numeroCidades;
 	}
 
 }
