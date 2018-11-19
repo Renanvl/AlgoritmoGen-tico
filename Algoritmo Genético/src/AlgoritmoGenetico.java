@@ -17,7 +17,7 @@ public class AlgoritmoGenetico {
 
 	private int numeroDeMutacoes = 0;
 	private int atualGeracao = 0;
-	private int geracaoMaxima = 100;
+	private int geracaoMaxima = 1000;
 
 	private int pointNum;
 	private int[][] populacao;
@@ -41,7 +41,7 @@ public class AlgoritmoGenetico {
 	}
 
 	public int[] tsp(Integer[][] matriz) {
-		tempoInicial = System.nanoTime();
+		tempoInicial = System.currentTimeMillis();
 		this.dist = matriz;
 		pointNum = matriz.length;
 		init();
@@ -172,14 +172,14 @@ public class AlgoritmoGenetico {
 		queue = Arrays.copyOfRange(queue, 0, num);
 		queue = embaralhar(queue);
 		for (int i = 0; i < num - 1; i += 2) {
-			doCrossover(queue[i], queue[i + 1]);
+			fazerCrossover(queue[i], queue[i + 1]);
 		}
 	}
 
 	private static final int ANTERIOR = 0;
 	private static final int PROXIMO = 1;
 
-	private void doCrossover(int x, int y) {
+	private void fazerCrossover(int x, int y) {
 		populacao[x] = getChild(x, y, ANTERIOR);
 		populacao[y] = getChild(x, y, PROXIMO);
 	}

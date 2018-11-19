@@ -42,8 +42,8 @@ public class GATSP {
 			ManipuladorMatriz mm = new ManipuladorMatriz(numeroCidades);
 			AlgoritmoGenetico ga = AlgoritmoGenetico.getInstance();
 			melhorCaminho = ga.tsp(mm.montarMatriz(elementosMatriz,nomeArquivo));
-			long tempoFinal = System.nanoTime();
-			System.out.println("\nTempo de execução: "+ (-1* (ga.getTempoInicial() - tempoFinal))+" nanosegundos\n");
+			long tempoFinal = System.currentTimeMillis();
+			System.out.println("\nTempo de execução: "+ (-1* (ga.getTempoInicial() - tempoFinal))+" milisegundos\n");
 			int distanciaTotal = mm.somaDist(melhorCaminho,mm.montarMatriz(elementosMatriz,nomeArquivo));
 			System.out.print("Melhor Caminho: ");
 	        for (int i = 0; i < melhorCaminho.length; i++) {
