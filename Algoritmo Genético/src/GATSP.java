@@ -14,14 +14,15 @@ public class GATSP {
 		try {
 			String nomeArquivo ;
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-			nomeArquivo = "si1032.tsp";/* input.readLine(); */
+			System.out.println("Insira o nome do arquivo de dados (ex.: dados.txt):");
+			nomeArquivo = input.readLine(); 
 			BufferedReader arquivoLeitura = new BufferedReader(new FileReader(endereco + "\\" + nomeArquivo));
 			String linha = arquivoLeitura.readLine();
 			String SomaLinhas = "";
 			ArrayList<Integer> elementosMatriz = new ArrayList<Integer>();
 			int contLinha = 1;
 			
-			System.out.println("Insira o nome do arquivo de dados (ex.: dados.txt):");
+			
 			
 			numeroCidades = identificarTamanhoMatriz(nomeArquivo);
 			while (linha != null) {

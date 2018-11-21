@@ -17,7 +17,7 @@ public class AlgoritmoGenetico {
 
 	private int numeroDeMutacoes = 0;
 	private int atualGeracao = 0;
-	private int geracaoMaxima = 1000;
+	private int geracaoMaxima = 100;
 
 	private int pointNum;
 	private int[][] populacao;
